@@ -1,0 +1,12 @@
+class,precision,recall,f1_score,support
+benign,0.9983361064891847,1.0,0.9991673605328892,600
+gafgyt.combo,1.0,1.0,1.0,600
+gafgyt.junk,1.0,1.0,1.0,600
+gafgyt.scan,1.0,1.0,1.0,600
+gafgyt.tcp,1.0,1.0,1.0,600
+gafgyt.udp,1.0,0.9983333333333333,0.9991659716430359,600
+mirai.ack,1.0,1.0,1.0,600
+mirai.scan,1.0,1.0,1.0,600
+mirai.syn,1.0,1.0,1.0,600
+mirai.udp,1.0,1.0,1.0,600
+mirai.udpplain,1.0,1.0,1.0,600

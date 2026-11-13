@@ -1,0 +1,3 @@
+device_count,record_rate_per_sec,wan_latency_ms,placement,sim_time_sec,generated_count,completed_count,dropped_count,mean_latency_ms,median_latency_ms,p95_latency_ms,min_latency_ms,max_latency_ms,wan_bytes_transmitted,cloud_energy_joules,fog_energy_joules,cloud_cost,execution_time_wall_ms
+10,1.00,100.0,fog,60.0,600,590,10,9.3808,9.3808,9.3808,9.3808,9.3808,0,79920000.00,5022252.59,0.0000,190
+10,1.00,100.0,cloud,60.0,600,590,10,206.9776,206.9776,206.9776,206.9776,206.9776,675120,79947670.94,5005998.00,39229.6800,48

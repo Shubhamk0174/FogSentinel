@@ -1,0 +1,31 @@
+quick_demo:
+  device_count: 10
+  record_rate_per_sec: 1.0
+  wan_latency_ms: 100.0
+  active_sim_duration_sec: 60.0
+  placements: ["fog", "cloud"]
+
+parameter_sweep:
+  device_counts: [10, 50, 100, 200]
+  record_rates: [1.0, 5.0]
+  wan_latencies_ms: [25.0, 100.0, 200.0]
+  placements: ["fog", "cloud"]
+  active_sim_duration_sec: 60.0
+
+network:
+  cloud_mips: 44800
+  cloud_ram: 40000
+  fog_mips: 4000
+  fog_ram: 8000
+  iot_mips: 500
+  iot_ram: 1000
+  lan_latency_ms: 2.0
+  device_bus_latency_ms: 1.0
+
+payloads:
+  traffic_record_bytes: 920
+  ip_tcp_header_bytes: 40
+  alert_record_bytes: 128
+  classifier_cpu_mips: 1000
+  alert_cpu_mips: 50
+

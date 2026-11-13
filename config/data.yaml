@@ -1,0 +1,65 @@
+raw_data_dir: "data/raw"
+processed_data_dir: "data/processed"
+demo_data_dir: "data/demo"
+
+target_device: "Danmini_Doorbell"
+feature_count: 115
+
+classes:
+  benign:
+    file: "benign_traffic.csv"
+    binary_label: "benign"
+    multi_label: "benign"
+  gafgyt.combo:
+    file: "gafgyt/combo.csv"
+    binary_label: "malicious"
+    multi_label: "gafgyt.combo"
+  gafgyt.junk:
+    file: "gafgyt/junk.csv"
+    binary_label: "malicious"
+    multi_label: "gafgyt.junk"
+  gafgyt.scan:
+    file: "gafgyt/scan.csv"
+    binary_label: "malicious"
+    multi_label: "gafgyt.scan"
+  gafgyt.tcp:
+    file: "gafgyt/tcp.csv"
+    binary_label: "malicious"
+    multi_label: "gafgyt.tcp"
+  gafgyt.udp:
+    file: "gafgyt/udp.csv"
+    binary_label: "malicious"
+    multi_label: "gafgyt.udp"
+  mirai.ack:
+    file: "mirai/ack.csv"
+    binary_label: "malicious"
+    multi_label: "mirai.ack"
+  mirai.scan:
+    file: "mirai/scan.csv"
+    binary_label: "malicious"
+    multi_label: "mirai.scan"
+  mirai.syn:
+    file: "mirai/syn.csv"
+    binary_label: "malicious"
+    multi_label: "mirai.syn"
+  mirai.udp:
+    file: "mirai/udp.csv"
+    binary_label: "malicious"
+    multi_label: "mirai.udp"
+  mirai.udpplain:
+    file: "mirai/udpplain.csv"
+    binary_label: "malicious"
+    multi_label: "mirai.udpplain"
+
+sampling:
+  samples_per_class: 4000
+  demo_benign_count: 5
+  demo_attack_per_class: 5
+  random_seed: 42
+
+split:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  random_state: 42
+
