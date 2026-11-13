@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FogSentinel — Faculty Viva Examination & Defense Manual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --card-hover: #1e293b;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #8b5cf6;
+      --cyan: #06b6d4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: var(--accent-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .header {
+      background: linear-gradient(180deg, #111827 0%, rgba(17, 24, 39, 0.8) 100%);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.25rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+    }
+    .header-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+    }
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #ffffff, #c4b5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .btn {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.2s ease;
+      text-decoration: none;
+    }
+    .btn:hover { background: #2563eb; text-decoration: none; }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #f8fafc;
+    }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.05); }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem 2rem;
+    }
+
+    /* Top Cheat Sheet Cards */
+    .cheat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .cheat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.1rem;
+      position: relative;
+    }
+    .cheat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent-purple);
+    }
+    .cheat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .cheat-value {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 0.25rem;
+    }
+    .cheat-sub {
+      font-size: 0.75rem;
+      color: var(--accent-green);
+      margin-top: 0.2rem;
+    }
+
+    /* Filter & Search Bar */
+    .filter-bar {
+      background: #172033;
+      border: 1px solid #23314d;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chip-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .chip {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 0.35rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .chip:hover, .chip.active {
+      background: rgba(139, 92, 246, 0.2);
+      border-color: #8b5cf6;
+      color: #c4b5fd;
+    }
+    .search-input {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      outline: none;
+      min-width: 250px;
+    }
+    .search-input:focus {
+      border-color: var(--accent-blue);
+    }
+
+    /* Questions Accordion */
+    .qa-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+    .qa-card:hover {
+      border-color: #374151;
+    }
+    .qa-header {
+      padding: 1.1rem 1.4rem;
+      font-weight: 700;
+      font-size: 0.98rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .qa-header:hover { background: #1c273e; }
+    .qa-badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-weight: 700;
+      margin-right: 0.75rem;
+    }
+    .badge-data { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+    .badge-ml { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+    .badge-sim { background: rgba(6, 182, 212, 0.2); color: #67e8f9; }
+    .badge-caveat { background: rgba(245, 158, 11, 0.2); color: #fde68a; }
+
+    .qa-body {
+      padding: 1.25rem 1.4rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      border-top: 1px solid #1f2937;
+      background: #0d1322;
+      display: none;
+      line-height: 1.7;
+    }
+    .qa-card.open .qa-body { display: block; }
+    .qa-card.open .qa-icon { transform: rotate(180deg); }
+    .qa-icon { transition: transform 0.2s ease; color: #94a3b8; }
+
+    .formula-box {
+      background: #172033;
+      border: 1px solid #23314d;
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 0.85rem 1.1rem;
+      margin: 0.85rem 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.86rem;
+      color: #93c5fd;
+      overflow-x: auto;
+    }
+
+    .action-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-content">
+      <div class="brand">
+        <div class="brand-icon">🎓</div>
+        <div>
+          <div class="brand-title">FogSentinel — Faculty Viva Examination Guide</div>
+          <div class="brand-subtitle">Model Answers, Mathematical Latency Proofs & Theoretical Architecture Manual</div>
+        </div>
+      </div>
+      <a href="index.html" class="btn btn-outline">⚡ Open Simulation Dashboard</a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Quick Reference Cheat Sheet -->
+    <div class="cheat-grid">
+      <div class="cheat-card">
+        <div class="cheat-label">Dataset & Dimensions</div>
+        <div class="cheat-value">115 Features</div>
+        <div class="cheat-sub">UCI N-BaIoT (5 Decay Windows)</div>
+      </div>
+      <div class="cheat-card">
+        <div class="cheat-label">Demonstration Set</div>
+        <div class="cheat-value">55 Records</div>
+        <div class="cheat-sub">5 Benign + 50 Attacks (10 Subtypes)</div>
+      </div>
+      <div class="cheat-card">
+        <div class="cheat-label">Selected Classifier</div>
+        <div class="cheat-value">Random Forest</div>
+        <div class="cheat-sub">99.98% Accuracy | 0.0066 ms Latency</div>
+      </div>
+      <div class="cheat-card">
+        <div class="cheat-label">Measured Latency Delta</div>
+        <div class="cheat-value">9.38 vs 207 ms</div>
+        <div class="cheat-sub">▼ 95.47% Faster at Fog Gateway</div>
+      </div>
+      <div class="cheat-card">
+        <div class="cheat-label">WAN Bandwidth Savings</div>
+        <div class="cheat-value">100% (0 KB)</div>
+        <div class="cheat-sub">659 KB to 60 MB saved per run</div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Bar -->
+    <div class="filter-bar">
+      <div class="chip-group">
+        <button class="chip active" onclick="filterCategory('all', this)">All Questions (12)</button>
+        <button class="chip" onclick="filterCategory('data', this)">Dataset & 115 Features</button>
+        <button class="chip" onclick="filterCategory('ml', this)">Machine Learning & Models</button>
+        <button class="chip" onclick="filterCategory('sim', this)">iFogSim2 Simulation</button>
+        <button class="chip" onclick="filterCategory('caveat', this)">Defense & Caveats</button>
+      </div>
+      <input type="text" class="search-input" id="search-box" placeholder="Search viva questions..." onkeyup="searchQuestions()">
+    </div>
+
+    <div class="action-row">
+      <div style="font-size: 0.85rem; color: var(--text-muted);" id="q-count-label">Showing all 12 defense questions</div>
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;" onclick="expandAll(true)">Expand All</button>
+        <button class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;" onclick="expandAll(false)">Collapse All</button>
+      </div>
+    </div>
+
+    <!-- Question 1 -->
+    <div class="qa-card open" data-cat="sim">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-sim">SIMULATION</span>
+          <span>1. What is the core objective of the FogSentinel project?</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        FogSentinel investigates two interconnected questions in IoT security:
+        <ol style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>Detection:</strong> Can a machine-learning model accurately identify malicious IoT botnet traffic from high-dimensional statistical network features?</li>
+          <li><strong>Placement:</strong> What are the empirical, measured trade-offs in end-to-end response latency, WAN network bandwidth, and energy consumption when deploying this classifier locally on a <strong>Fog Gateway</strong> versus in a centralized <strong>Remote Cloud Datacenter</strong>?</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="qa-card" data-cat="data">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-data">DATASET</span>
+          <span>2. What represents "one record" in your dataset? Is it a raw network packet?</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        <strong>No, a record is NOT a single packet or payload.</strong><br>
+        A record is a <strong>115-dimensional vector of derived statistical metrics</strong> (packet stream weights, mean sizes, variance, standard deviation, packet jitter, covariance, and radii) computed over 5 rolling exponentially decaying time windows (&lambda; = 0.01, 0.1, 1.0, 3.0, 5.0). Raw packet inspection at the edge is too noisy and compute-intensive; these statistical stream vectors capture temporal botnet flood behavior.
+      </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="qa-card" data-cat="data">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-data">DATASET</span>
+          <span>3. What is the exact mathematical breakdown of the 115 features?</span>
+        </div>
+        <div class="qa-body">
+          For each decaying window (&lambda; &in; {0.01, 0.1, 1, 3, 5}), the stream aggregator computes 23 continuous features:
+          <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li><strong>Host-Level (H):</strong> Packet weight, mean packet size, variance from source IP (3 &times; 5 = 15 features).</li>
+            <li><strong>Host-MAC-IP (MI):</strong> Packet weight, mean, variance between source IP and MAC (3 &times; 5 = 15 features).</li>
+            <li><strong>Host-Host (HH):</strong> Traffic between specific source and destination IP sockets: weight, mean, std, <strong>packet jitter mean</strong>, and <strong>packet jitter std</strong> (7 &times; 5 = 35 features).</li>
+            <li><strong>Host-Host Port (HpHp):</strong> Traffic to specific destination IP + port (7 &times; 5 = 35 features).</li>
+            <li><strong>Multi-variate Properties:</strong> Covariance, Pearson correlation coefficient, and 2D spatial radius between streams (3 &times; 5 = 15 features).</li>
+          </ul>
+          <div class="formula-box">Total Features = 23 statistical properties &times; 5 decay windows = 115 continuous dimensions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="qa-card" data-cat="data">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-data">DATASET</span>
+          <span>4. Explain the 55-record demonstration dataset and how data leakage was prevented.</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        The demonstration dataset is a balanced subset of 55 real records: 5 benign + 5 per each of the 10 attack classes (Mirai ack, scan, syn, udp, udpplain; BASHLITE combo, junk, scan, tcp, udp).<br><br>
+        <strong>Zero Data Leakage Safeguards:</strong>
+        <ol style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li>The 55 demo records were extracted and isolated into <code>data/demo/demo_features.csv</code> (55 &times; 115) and <code>data/demo/demo_labels.csv</code> <strong>prior</strong> to any model training.</li>
+          <li>Remaining data was partitioned using stratified sampling into Train (30,800), Validation (6,600), and Test (6,600).</li>
+          <li><code>StandardScaler</code> was <strong>fitted strictly on the Training set only</strong>. Validation, Test, and Demo data were strictly transformed using training parameters.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="qa-card" data-cat="ml">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-ml">MACHINE LEARNING</span>
+          <span>5. What models did you evaluate, and why did Random Forest outperform Deep Learning?</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        We evaluated three distinct model classes across Binary and 11-Class tasks: Logistic Regression (linear baseline), Multi-Layer Perceptron (feed-forward neural net with Dense(128) + ReLU + Dense(64)), and Random Forest (100 decision trees).<br><br>
+        <strong>Held-Out Test Results (6,600 Records):</strong>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>Random Forest:</strong> 99.98% Binary Acc (99.99% F1) | 99.98% Multi-Class Acc (99.98% F1) | <strong>0.0066 ms latency</strong>.</li>
+          <li><strong>MLP Neural Net:</strong> 99.97% Binary Acc | 90.71% Multi-Class Acc | 0.0154 ms latency.</li>
+          <li><strong>Logistic Regression:</strong> 89.52% Binary Acc | 80.89% Multi-Class Acc.</li>
+        </ul>
+        <br>
+        <strong>Why Random Forest Won:</strong> Tabular statistical features naturally suit decision tree ensembles (Grinsztajn et al., NeurIPS). Abrupt packet-rate surges (e.g. UDP floods) produce step changes that decision trees segment with sharp orthogonal hyperplanes, whereas neural nets suffer from gradient smoothing and require significantly more tuning.
+      </div>
+    </div>
+
+    <!-- Question 6 -->
+    <div class="qa-card" data-cat="ml">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-ml">MACHINE LEARNING</span>
+          <span>6. What were the most discriminative features according to feature importance?</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        Random Forest Gini importance analysis identified that <strong>packet jitter means</strong> and <strong>stream weights</strong> are the primary discriminators:
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><code>HH_jit_L0.1_mean</code> (Importance: 0.0579) & <code>HH_jit_L0.01_mean</code> (0.0468): Inter-packet arrival jitter between host socket pairs. Normal human traffic has high, irregular jitter; automated botnet floods send packets with rigid, near-zero inter-arrival jitter.</li>
+          <li><code>H_L0.1_weight</code> (0.0382) & <code>H_L0.01_weight</code> (0.0345): Source host packet counts per time window. Volumetric attacks abruptly multiply packet weights by orders of magnitude.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Question 7 -->
+    <div class="qa-card" data-cat="sim">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-sim">SIMULATION</span>
+          <span>7. What is iFogSim2, and does it train or execute your Python code?</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        <strong>iFogSim2 does NOT execute or train Python machine learning models.</strong><br>
+        iFogSim2 is an open-source Java discrete-event simulation toolkit developed by the Cloudslab Laboratory (University of Melbourne) atop CloudSim. It models hardware topologies (MIPS capacity, RAM, power models), network links (bandwidth, propagation delay), and Distributed Data Flow (DDF) application graphs.<br><br>
+        <strong>The Integration Bridge:</strong> Our script <code>integration/export_workload.py</code> profiled the Random Forest execution: 100 decision trees on 115 features requires ~1,000 MIPS of CPU work, a 960-byte input tuple (<code>IOT_TRAFFIC</code>), and a 168-byte output tuple (<code>SECURITY_ALERT</code>). iFogSim2 ingests this workload manifest to simulate execution at scale.
+      </div>
+    </div>
+
+    <!-- Question 8 -->
+    <div class="qa-card" data-cat="sim">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-sim">SIMULATION</span>
+          <span>8. How do you mathematically explain the latency difference (9.38 ms vs. 206.98 ms)?</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        Total end-to-end response latency in iFogSim2 is modeled as:
+        <div class="formula-box">Total Latency = T_prop(up) + T_trans(up) + T_queue + T_proc + T_prop(down) + T_trans(down)</div>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>Local Fog Placement:</strong> Traverses only the local 100 Mbps LAN link (2.0 ms propagation each way). With 1,000 MIPS processing effort on a 4,000 MIPS gateway:
+          <br><code>Latency &approx; 2.0 (LAN up) + 0.1 (trans) + 5.2 (queue + 0.25ms CPU) + 2.0 (LAN down) = 9.38 ms</code>.</li>
+          <li><strong>Remote Cloud Placement:</strong> Must traverse the physical WAN link twice (100 ms uplink + 100 ms downlink = 200 ms physical propagation delay):
+          <br><code>Latency &approx; 2.0 (LAN) + 100.0 (WAN up) + 0.9 (trans) + 2.1 (Cloud queue + CPU) + 100.0 (WAN down) + 2.0 (LAN) = 206.98 ms</code>.</li>
+        </ul>
+        <br>Fog placement eliminates the physical speed-of-light propagation bottleneck over hundreds of kilometers.
+      </div>
+    </div>
+
+    <!-- Question 9 -->
+    <div class="qa-card" data-cat="sim">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-sim">SIMULATION</span>
+          <span>9. What was the scope and result of the 48-scenario parameter sweep?</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        We executed a full-factorial parameter sweep across 48 distinct configurations:
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>Device Counts (4):</strong> 10, 50, 100, 200 IoT devices.</li>
+          <li><strong>Transmission Rates (2):</strong> 1.0 rec/s (light telemetry) vs. 5.0 rec/s (attack flood).</li>
+          <li><strong>One-Way WAN Latencies (3):</strong> 25 ms (metro), 100 ms (internet), 200 ms (intercontinental).</li>
+          <li><strong>Placements (2):</strong> Local Fog Gateway vs. Remote Cloud.</li>
+        </ul>
+        <br>
+        <strong>Key Sweep Findings:</strong>
+        <ol style="margin-left: 1.5rem;">
+          <li><strong>WAN Latency Decoupling:</strong> Fog placement latency remained invariant at ~9.38 ms across 25ms, 100ms, and 200ms WAN delays. Cloud latency scaled linearly: 56.98 ms &rarr; 206.98 ms &rarr; 406.98 ms.</li>
+          <li><strong>Bandwidth Elimination:</strong> Across all 24 Fog scenarios, WAN bandwidth was identically <strong>0.00 KB</strong>. Cloud scenarios scaled up to <strong>60,078 KB (60.1 MB)</strong>.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Question 10 -->
+    <div class="qa-card" data-cat="caveat">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-caveat">CAVEAT</span>
+          <span>10. Does Fog placement always save energy compared to Cloud?</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        <strong>No, Fog computing does not consistently save energy.</strong><br>
+        Our measured data shows that the Fog Gateway consumed slightly <em>more</em> energy in Fog placement (5,022.25 kJ vs 5,005.99 kJ) because its CPU was actively computing the 1,000 MIPS ML classification rather than idling. While Fog placement avoids WAN transmission power, commercial datacenters benefit from massive economies of scale and cooling efficiencies. Fog computing is justified by <strong>ultra-low latency, bandwidth savings, and offline survivability</strong>, not global energy reduction.
+      </div>
+    </div>
+
+    <!-- Question 11 -->
+    <div class="qa-card" data-cat="caveat">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-caveat">CAVEAT</span>
+          <span>11. Does FogSentinel physically disconnect devices or block switch ports?</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        FogSentinel is an <strong>academic research prototype and simulation framework</strong>. Decisions are labeled as <code>QUARANTINE_RECOMMENDED</code>. In an actual physical deployment, this alert tuple would interface with a <strong>Software-Defined Networking (SDN) OpenFlow controller</strong> (such as OpenDaylight or ONOS) via REST APIs to dynamically push flow-drop rules to the network switch port.
+      </div>
+    </div>
+
+    <!-- Question 12 -->
+    <div class="qa-card" data-cat="sim">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <div>
+          <span class="qa-badge badge-sim">SIMULATION</span>
+          <span>12. Why did you choose iFogSim2 instead of NS-3, Mininet, or OMNeT++?</span>
+        </div>
+        <span class="qa-icon">▼</span>
+      </div>
+      <div class="qa-body">
+        While NS-3, Mininet, and OMNeT++ specialize in packet-level Layer 2/3 protocol headers, routing tables, and radio frequencies, <strong>iFogSim2 is specifically engineered for Distributed Data Flow (DDF) application placement and edge-to-cloud mapping</strong>. It explicitly models CPU processing queues (MIPS), memory constraints, and linear power state models alongside network propagation delays. This allows us to directly test our core architectural question: <em>where should the ML module execute?</em>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function toggleQA(el) {
+      const card = el.parentElement;
+      card.classList.toggle('open');
+    }
+
+    function expandAll(open) {
+      document.querySelectorAll('.qa-card').forEach(c => {
+        if (open) c.classList.add('open');
+        else c.classList.remove('open');
+      });
+    }
+
+    function filterCategory(cat, btn) {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.qa-card');
+      let visible = 0;
+      cards.forEach(c => {
+        if (cat === 'all' || c.getAttribute('data-cat') === cat) {
+          c.style.display = 'block';
+          visible++;
+        } else {
+          c.style.display = 'none';
+        }
+      });
+      document.getElementById('q-count-label').innerText = `Showing ${visible} of 12 defense questions`;
+    }
+
+    function searchQuestions() {
+      const q = document.getElementById('search-box').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.qa-card');
+      let visible = 0;
+      cards.forEach(c => {
+        const text = c.innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+          c.style.display = 'block';
+          visible++;
+        } else {
+          c.style.display = 'none';
+        }
+      });
+      document.getElementById('q-count-label').innerText = `Showing ${visible} of 12 defense questions`;
+    }
+  </script>
+</body>
+</html>

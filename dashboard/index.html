@@ -81,6 +81,12 @@
       color: var(--text-muted);
       font-weight: 400;
     }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
     .badges {
       display: flex;
       gap: 0.5rem;
@@ -288,8 +294,9 @@
       align-items: center;
       gap: 0.4rem;
       transition: background 0.2s ease;
+      text-decoration: none;
     }
-    .btn:hover { background: #2563eb; }
+    .btn:hover { background: #2563eb; text-decoration: none; }
     .btn-green { background: var(--accent-green); }
     .btn-green:hover { background: #059669; }
     .btn-outline {
@@ -447,38 +454,6 @@
       height: 250px;
     }
 
-    /* Q&A Accordion */
-    .qa-item {
-      background: #172033;
-      border: 1px solid #23314d;
-      border-radius: 8px;
-      margin-bottom: 0.75rem;
-      overflow: hidden;
-    }
-    .qa-question {
-      padding: 0.9rem 1.2rem;
-      font-weight: 600;
-      font-size: 0.92rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-    }
-    .qa-question:hover { background: #1c273e; }
-    .qa-answer {
-      padding: 1rem 1.2rem;
-      font-size: 0.88rem;
-      color: #cbd5e1;
-      border-top: 1px solid #23314d;
-      background: #0f172a;
-      display: none;
-      line-height: 1.6;
-    }
-    .qa-item.open .qa-answer { display: block; }
-    .qa-item.open .qa-icon { transform: rotate(180deg); }
-    .qa-icon { transition: transform 0.2s ease; }
-
     /* Responsive */
     @media (max-width: 768px) {
       .header-content { flex-direction: column; align-items: flex-start; }
@@ -500,10 +475,15 @@
           <div class="brand-subtitle">IoT Network-Traffic Anomaly Detection & Edge/Fog vs. Cloud Placement Engine</div>
         </div>
       </div>
-      <div class="badges">
-        <span class="badge badge-green">● Official iFogSim2 v2.0.0</span>
-        <span class="badge badge-blue">UCI N-BaIoT (115 Features)</span>
-        <span class="badge badge-purple">48 Measured Scenarios</span>
+      <div class="header-actions">
+        <div class="badges">
+          <span class="badge badge-green">● Official iFogSim2 v2.0.0</span>
+          <span class="badge badge-blue">UCI N-BaIoT (115 Features)</span>
+          <span class="badge badge-purple">48 Measured Scenarios</span>
+        </div>
+        <a href="viva_guide.html" target="_blank" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.35rem 0.85rem;">
+          🎓 Open Viva Guide ↗
+        </a>
       </div>
     </div>
   </header>
@@ -511,13 +491,12 @@
   <!-- Main Container -->
   <main class="container">
 
-    <!-- Navigation Tabs -->
+    <!-- Navigation Tabs (Cleaned: 4 core simulation & ML tabs) -->
     <nav class="nav-tabs">
       <button class="tab-btn active" onclick="switchTab('tab-sim')">⚡ Live Simulation & Topology Animator</button>
       <button class="tab-btn" onclick="switchTab('tab-charts')">📊 Performance Charts & Figures</button>
       <button class="tab-btn" onclick="switchTab('tab-sweep')">📋 48-Scenario Sweep Explorer</button>
       <button class="tab-btn" onclick="switchTab('tab-demo')">🔬 55-Record Traffic Classifier</button>
-      <button class="tab-btn" onclick="switchTab('tab-viva')">🎓 Faculty Viva & Architecture Guide</button>
     </nav>
 
     <!-- ==================================================================== -->
@@ -1033,74 +1012,6 @@
       </div>
     </section>
 
-    <!-- ==================================================================== -->
-    <!-- TAB 5: FACULTY VIVA & ARCHITECTURE GUIDE -->
-    <!-- ==================================================================== -->
-    <section id="tab-viva" class="tab-content">
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">🎓 Faculty Examination Defense & Theoretical Guide</div>
-            <div class="card-subtitle">Comprehensive technical answers to anticipated faculty and viva questions</div>
-          </div>
-        </div>
-
-        <div class="qa-item open">
-          <div class="qa-question" onclick="toggleQA(this)">
-            <span>1. What represents "one record" in FogSentinel? Is it a single packet or payload?</span>
-            <span class="qa-icon">▼</span>
-          </div>
-          <div class="qa-answer">
-            <strong>No, one record is not a raw network packet.</strong> It is a <strong>115-dimensional continuous statistical summary vector</strong> extracted over 5 exponentially decaying sliding time windows (&lambda; = 0.01, 0.1, 1.0, 3.0, 5.0) by a network stream aggregator. It captures packet size statistics, stream weights, packet jitter means and standard deviations, socket covariance, and radii. Feeding raw packet bytes into ML at the edge is too noisy and compute-intensive; these statistical stream vectors capture temporal botnet flood behavior.
-          </div>
-        </div>
-
-        <div class="qa-item">
-          <div class="qa-question" onclick="toggleQA(this)">
-            <span>2. Why did Random Forest outperform Deep Neural Networks (MLP)?</span>
-            <span class="qa-icon">▼</span>
-          </div>
-          <div class="qa-answer">
-            We empirically evaluated Logistic Regression, a Multi-Layer Perceptron (MLP) neural network, and Random Forest on 6,600 unseen test records. Random Forest achieved <strong>99.98% accuracy</strong>, significantly outperforming the MLP (90.71% multi-class accuracy). In modern tabular machine learning literature (e.g., Grinsztajn et al., NeurIPS), decision tree ensembles consistently outperform neural networks on continuous statistical tables because decision trees construct axis-aligned step boundaries that cleanly isolate abrupt shifts like UDP and SYN flood bursts. In addition, Random Forest executes in <strong>0.0066 ms per record</strong>, enabling 151,500 predictions/sec on edge hardware.
-          </div>
-        </div>
-
-        <div class="qa-item">
-          <div class="qa-question" onclick="toggleQA(this)">
-            <span>3. How do you mathematically explain the latency difference (9.38 ms vs. 206.98 ms)?</span>
-            <span class="qa-icon">▼</span>
-          </div>
-          <div class="qa-answer">
-            In iFogSim2, total end-to-end response latency is the sum of propagation, transmission, queueing, and processing times:<br>
-            <code>Latency = T_prop(up) + T_trans(up) + T_queue + T_proc + T_prop(down) + T_trans(down)</code><br><br>
-            • <strong>Fog Placement:</strong> Traverses only the local LAN link (propagation = 2.0 ms each way). With 1,000 MIPS processing effort on a 4,000 MIPS gateway (approx 0.25 ms execution + 5 ms queueing), total response time is <strong>9.38 ms</strong>.<br>
-            • <strong>Cloud Placement:</strong> Must traverse the physical WAN link twice (100 ms uplink + 100 ms downlink = 200 ms minimum physical speed-of-light delay). Even with a fast 44,000 MIPS cloud server, total latency is <strong>206.98 ms</strong>.<br>
-            Fog computing fundamentally eliminates the WAN propagation bottleneck.
-          </div>
-        </div>
-
-        <div class="qa-item">
-          <div class="qa-question" onclick="toggleQA(this)">
-            <span>4. Does Fog placement always save energy?</span>
-            <span class="qa-icon">▼</span>
-          </div>
-          <div class="qa-answer">
-            <strong>No, Fog computing does not consistently save energy.</strong> In our simulations, the Fog node consumed slightly more energy in Fog placement (5,022.25 kJ vs 5,005.99 kJ) because its CPU was actively computing the 1,000 MIPS classification rather than simply routing packets. Fog computing is optimized for <strong>low response latency, bandwidth preservation, and privacy</strong>, not global energy reduction.
-          </div>
-        </div>
-
-        <div class="qa-item">
-          <div class="qa-question" onclick="toggleQA(this)">
-            <span>5. Does FogSentinel physically disconnect devices upon attack detection?</span>
-            <span class="qa-icon">▼</span>
-          </div>
-          <div class="qa-answer">
-            FogSentinel is an <strong>academic research prototype and simulation framework</strong>. When an attack is detected, it generates a simulated action labeled <code>QUARANTINE_RECOMMENDED</code>. In a production industrial deployment, this event would trigger a REST API call to a Software-Defined Networking (SDN) OpenFlow controller (such as OpenDaylight or ONOS) to dynamically inject flow-drop rules into the physical switch.
-          </div>
-        </div>
-      </div>
-    </section>
-
   </main>
 
   <!-- Deep Inspection Slide-Over Drawer -->
@@ -1345,7 +1256,7 @@
 
     function exportFilteredSweepCSV() {
       const rows = Array.from(document.querySelectorAll('#sweep-table tr'));
-      let csv = rows.map(r => Array.from(r.querySelectorAll('th,td')).map(c => `"${c.innerText.replace(/"/g, '""')}"`).join(',')).join('\n');
+      let csv = rows.map(r => Array.from(r.querySelectorAll('th,td')).map(c => `"${c.innerText.replace(/"/g, '""')}"`).join('\n'));
       const blob = new Blob([csv], { type: 'text/csv' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -1424,12 +1335,6 @@
     function closeDrawer() {
       document.getElementById('drawer-overlay').style.display = 'none';
       document.getElementById('feat-drawer').classList.remove('open');
-    }
-
-    // Q&A Toggle
-    function toggleQA(el) {
-      const item = el.parentElement;
-      item.classList.toggle('open');
     }
 
     // Init

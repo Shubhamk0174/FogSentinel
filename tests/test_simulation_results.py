@@ -68,3 +68,11 @@ def test_html_dashboard_artifact():
     assert "DEMO_DATA" in content, "dashboard/index.html must contain embedded demo data"
     assert "topology-svg" in content, "dashboard/index.html must contain SVG topology visualizer"
 
+def test_viva_guide_html():
+    viva_path = Path("dashboard/viva_guide.html")
+    assert viva_path.exists(), "dashboard/viva_guide.html must exist"
+    content = viva_path.read_text(encoding="utf-8")
+    assert len(content) > 10000, "dashboard/viva_guide.html must not be empty"
+    assert "qa-card" in content, "dashboard/viva_guide.html must contain defense Q&A cards"
+    assert "115 Features" in content, "dashboard/viva_guide.html must contain feature breakdown"
+

@@ -16,7 +16,7 @@ from ml.predict import run_demo_prediction
 from ml.explain import explain_feature_importance
 from integration.export_workload import export_workload_manifest
 from integration.generate_simulation_figures import generate_simulation_figures
-from dashboard.generate_html_dashboard import build_html_dashboard
+from dashboard.generate_html_dashboard import build_all_html_dashboards
 
 def run_java_simulation(mode="quick"):
     print(f"\n[Step 7/9] Running iFogSim2 Java Simulation (Mode: {mode.upper()})...")
@@ -83,9 +83,9 @@ def run_full_pipeline(mode="quick"):
     csv_to_plot = "outputs/simulation/simulation_results.csv" if (mode == "sweep" or Path("outputs/simulation/simulation_results.csv").exists()) else "outputs/simulation/quick_demo_results.csv"
     generate_simulation_figures(csv_path=csv_to_plot)
 
-    # Step 10: Refresh Self-Contained Web Dashboard
-    print("\n[Step 10/10] Building self-contained HTML simulation dashboard...")
-    build_html_dashboard()
+    # Step 10: Refresh Self-Contained Web Dashboards
+    print("\n[Step 10/10] Building self-contained HTML simulation dashboard & viva guide...")
+    build_all_html_dashboards()
 
     total_time = time.time() - t_start
     print("\n=========================================================================")
