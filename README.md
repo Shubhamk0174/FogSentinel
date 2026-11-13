@@ -4,8 +4,10 @@
 [![Java 17](https://img.shields.io/badge/Java-OpenJDK%2017-orange.svg)](https://openjdk.org/)
 [![iFogSim2](https://img.shields.io/badge/Simulator-iFogSim2%20v2.0.0-green.svg)](https://github.com/Cloudslab/iFogSim)
 [![Dataset](https://img.shields.io/badge/Dataset-UCI%20N--BaIoT-yellow.svg)](https://archive.ics.uci.edu/dataset/442/detection+of+iot+botnet+attacks+n+baiot)
-[![Tests](https://img.shields.io/badge/Tests-11%20Passed-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-12%20Passed-brightgreen.svg)]()
 
+> **🌐 Interactive Web Dashboard:** Open **[dashboard/index.html](file:///c:/Users/shubh/OneDrive/Desktop/Riddhi/dashboard/index.html)** in any web browser for a zero-dependency, standalone HTML/SVG simulation visualizer with live packet animation, 48-scenario sweep explorer, and 115-feature deep inspection!
+> 
 > **📖 Complete Project & Viva Guide:** For an in-depth explanation of the implementation and a complete faculty presentation manual with viva Q&A, read **[PROJECT_EXPLANATION.md](file:///c:/Users/shubh/OneDrive/Desktop/Riddhi/docs/PROJECT_EXPLANATION.md)**.
 
 > **Project Purpose:** A reproducible, faculty-ready academic prototype combining machine learning with fog-computing simulation to answer two core questions:
@@ -113,6 +115,8 @@ FogSentinel/
 │   └── run_pipeline.py                          # Single-command end-to-end pipeline runner
 │
 ├── dashboard/
+│   ├── index.html                               # Standalone interactive HTML simulation dashboard (Zero-dependency)
+│   ├── generate_html_dashboard.py               # HTML dashboard generator
 │   └── app.py                                   # Interactive Streamlit faculty demo UI
 │
 ├── outputs/
@@ -150,7 +154,16 @@ FogSentinel/
 python integration/run_pipeline.py
 ```
 
-### 4.3 Launch Interactive Demonstration Dashboard
+### 4.3 Open the Interactive Web Dashboard
+You have two ways to view the interactive dashboard:
+
+**Option A: Standalone Zero-Dependency HTML Dashboard (Instant in Browser)**
+```powershell
+Start-Process dashboard/index.html
+# Or simply double-click dashboard/index.html in Windows File Explorer!
+```
+
+**Option B: Streamlit Web Dashboard**
 ```powershell
 python -m streamlit run dashboard/app.py
 ```

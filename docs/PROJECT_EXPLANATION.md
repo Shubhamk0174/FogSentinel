@@ -273,11 +273,18 @@ When defending your project, demonstrating intellectual honesty will earn top ma
 Follow this script when demonstrating the project to your faculty:
 
 ### Step 1: Open the Interactive Dashboard
-In terminal, run:
-```powershell
-.\.venv\Scripts\python.exe -m streamlit run dashboard/app.py
-```
-Open `http://localhost:8501`.
+You can present using either of two interfaces:
+* **Option A (Instant HTML Dashboard - Recommended for Quick Demos):**  
+  Double-click `dashboard/index.html` or run:
+  ```powershell
+  Start-Process dashboard/index.html
+  ```
+  *Opens immediately in any browser with zero background processes, full SVG animated network topology, live packet flows, and interactive 48-scenario filtering.*
+* **Option B (Streamlit Web Dashboard):**
+  ```powershell
+  .\.venv\Scripts\python.exe -m streamlit run dashboard/app.py
+  ```
+  *Accessible at `http://localhost:8501`.*
 
 ### Step 2: Tab 1 — 55-Record Traffic Classifier
 * **What to Say:** *"Here we have 55 real IoT network traffic records extracted from commercial Danmini Doorbells. Each row represents 115 continuous statistical features over sliding time windows. Notice that ground-truth labels were kept strictly separate during model evaluation."*
