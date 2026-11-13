@@ -59,3 +59,12 @@ def test_full_sweep_results():
     # Completed counts must be positive across all scenarios
     assert (df["completed_count"] > 0).all(), "Completed counts must be > 0 in all scenarios"
 
+def test_html_dashboard_artifact():
+    html_path = Path("dashboard/index.html")
+    assert html_path.exists(), "dashboard/index.html must exist"
+    content = html_path.read_text(encoding="utf-8")
+    assert len(content) > 50000, "dashboard/index.html must not be empty"
+    assert "SIM_DATA" in content, "dashboard/index.html must contain embedded simulation sweep data"
+    assert "DEMO_DATA" in content, "dashboard/index.html must contain embedded demo data"
+    assert "topology-svg" in content, "dashboard/index.html must contain SVG topology visualizer"
+
